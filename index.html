@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Discipline Checklist ✅</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    h2 {
+      margin-top: 20px;
+      color: #34495e;
+    }
+    .task {
+      margin: 5px 0;
+    }
+    .score {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #27ae60;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ Daily Discipline Checklist</h1>
+
+    <h2>🌅 Morning Routine</h2>
+    <div class="task"><input type="checkbox"> Wake up early</div>
+    <div class="task"><input type="checkbox"> Make bed immediately</div>
+    <div class="task"><input type="checkbox"> Pray/Gratitude (2–5 mins)</div>
+    <div class="task"><input type="checkbox"> Drink 1 glass warm water</div>
+    <div class="task"><input type="checkbox"> Quick stretch / mobility warm-up</div>
+    <div class="task"><input type="checkbox"> Clean home/self (morning cleaning)</div>
+    <div class="task"><input type="checkbox"> 1-hour workout (calisthenics/combat)</div>
+    <div class="task"><input type="checkbox"> Bath & skin care</div>
+    <div class="task"><input type="checkbox"> Healthy breakfast (no sugar/junk)</div>
+    <div class="task"><input type="checkbox"> 10-min reading/listening</div>
+
+    <h2>📚 Day Routine</h2>
+    <div class="task"><input type="checkbox"> College / Deep Work session</div>
+    <div class="task"><input type="checkbox"> Lunch (balanced, no junk)</div>
+    <div class="task"><input type="checkbox"> 15–20 min walk after lunch</div>
+    <div class="task"><input type="checkbox"> Second Deep Work session</div>
+
+    <h2>🌇 Evening Routine</h2>
+    <div class="task"><input type="checkbox"> Clean home/self (evening)</div>
+    <div class="task"><input type="checkbox"> Evening snack (fruits, nuts)</div>
+    <div class="task"><input type="checkbox"> Short movement break</div>
+
+    <h2>🌙 Night Routine</h2>
+    <div class="task"><input type="checkbox"> Dinner (light, before 8:30)</div>
+    <div class="task"><input type="checkbox"> Skin care</div>
+    <div class="task"><input type="checkbox"> Next day plan</div>
+    <div class="task"><input type="checkbox"> Set clothes/books ready</div>
+    <div class="task"><input type="checkbox"> Gratitude/Prayer</div>
+    <div class="task"><input type="checkbox"> Sleep (7 hrs fixed)</div>
+
+    <h2>💎 Daily Rules</h2>
+    <div class="task"><input type="checkbox"> No sugar</div>
+    <div class="task"><input type="checkbox"> Drink 5 litres water</div>
+    <div class="task"><input type="checkbox"> No junk/oily foods</div>
+    <div class="task"><input type="checkbox"> Save minimum ₹10 daily</div>
+    <div class="task"><input type="checkbox"> Limit social media (max 30–45 mins)</div>
+
+    <div class="score" id="score">📊 Discipline Score: 0%</div>
+  </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const scoreDisplay = document.getElementById('score');
+
+    function updateScore() {
+      let checked = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) checked++;
+      });
+      const total = checkboxes.length;
+      const percent = Math.round((checked / total) * 100);
+      scoreDisplay.textContent = `📊 Discipline Score: ${percent}%`;
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener('change', updateScore));
+  </script>
+</body>
+</html>
