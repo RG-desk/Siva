@@ -1,97 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Daily Discipline Checklist ✅</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      line-height: 1.6;
-    }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-    }
-    h2 {
-      margin-top: 20px;
-      color: #34495e;
-    }
-    .task {
-      margin: 5px 0;
-    }
-    .score {
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 18px;
-      color: #27ae60;
-    }
-    .container {
-      max-width: 700px;
-      margin: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Discipline Checklist ✅</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --primary-color: #4a90e2;
+            --secondary-color: #7d8e9e;
+            --border-color: #e0e0e0;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 2em;
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            display: inline-block;
+            margin-top: 30px;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        .task input[type="checkbox"] {
+            margin-right: 12px;
+            width: 1.3em;
+            height: 1.3em;
+            cursor: pointer;
+        }
+        .task label {
+            flex: 1;
+            cursor: pointer;
+        }
+        .task input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: var(--secondary-color);
+        }
+        .score-container {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .score {
+            font-weight: bold;
+            font-size: 22px;
+            color: var(--success-color);
+        }
+        .action-button {
+            display: inline-block;
+            margin: 10px 5px 0;
+            padding: 10px 15px;
+            font-size: 1em;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #resetBtn { background-color: var(--danger-color); }
+        #resetBtn:hover { background-color: #c0392b; }
+        #exportBtn { background-color: var(--primary-color); }
+        #exportBtn:hover { background-color: #357abd; }
+        #downloadPdfBtn { background-color: var(--success-color); }
+        #downloadPdfBtn:hover { background-color: #229954; }
+        #export-area {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+            display: none;
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            text-align: left;
+        }
+        .report-table th, .report-table td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+        }
+        .report-table thead tr {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        .report-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>✅ Daily Discipline Checklist</h1>
+
+<div class="container">
+    <header>
+        <h1>✅ Daily Discipline Checklist</h1>
+    </header>
 
     <h2>🌅 Morning Routine</h2>
-    <div class="task"><input type="checkbox"> Wake up early</div>
-    <div class="task"><input type="checkbox"> Make bed immediately</div>
-    <div class="task"><input type="checkbox"> Pray/Gratitude (2–5 mins)</div>
-    <div class="task"><input type="checkbox"> Drink 1 glass warm water</div>
-    <div class="task"><input type="checkbox"> Quick stretch / mobility warm-up</div>
-    <div class="task"><input type="checkbox"> Clean home/self (morning cleaning)</div>
-    <div class="task"><input type="checkbox"> 1-hour workout (calisthenics/combat)</div>
-    <div class="task"><input type="checkbox"> Bath & skin care</div>
-    <div class="task"><input type="checkbox"> Healthy breakfast (no sugar/junk)</div>
-    <div class="task"><input type="checkbox"> 10-min reading/listening</div>
+    <div class="task"><input type="checkbox" id="t1"><label for="t1">Wake up early</label></div>
+    <div class="task"><input type="checkbox" id="t2"><label for="t2">Make bed immediately</label></div>
+    <div class="task"><input type="checkbox" id="t3"><label for="t3">Pray/Gratitude (2–5 mins)</label></div>
+    <div class="task"><input type="checkbox" id="t4"><label for="t4">Drink 1 glass warm water</label></div>
+    <div class="task"><input type="checkbox" id="t5"><label for="t5">Quick stretch / mobility warm-up</label></div>
+    <div class="task"><input type="checkbox" id="t6"><label for="t6">Clean home/self (morning cleaning)</label></div>
+    <div class="task"><input type="checkbox" id="t7"><label for="t7">1-hour workout (calisthenics/combat)</label></div>
+    <div class="task"><input type="checkbox" id="t8"><label for="t8">Bath & skin care</label></div>
+    <div class="task"><input type="checkbox" id="t9"><label for="t9">Healthy breakfast (no sugar/junk)</label></div>
+    <div class="task"><input type="checkbox" id="t10"><label for="t10">10-min reading/listening</label></div>
 
     <h2>📚 Day Routine</h2>
-    <div class="task"><input type="checkbox"> College / Deep Work session</div>
-    <div class="task"><input type="checkbox"> Lunch (balanced, no junk)</div>
-    <div class="task"><input type="checkbox"> 15–20 min walk after lunch</div>
-    <div class="task"><input type="checkbox"> Second Deep Work session</div>
+    <div class="task"><input type="checkbox" id="t11"><label for="t11">College / Deep Work session</label></div>
+    <div class="task"><input type="checkbox" id="t12"><label for="t12">Lunch (balanced, no junk)</label></div>
+    <div class="task"><input type="checkbox" id="t13"><label for="t13">15–20 min walk after lunch</label></div>
+    <div class="task"><input type="checkbox" id="t14"><label for="t14">Second Deep Work session</label></div>
 
     <h2>🌇 Evening Routine</h2>
-    <div class="task"><input type="checkbox"> Clean home/self (evening)</div>
-    <div class="task"><input type="checkbox"> Evening snack (fruits, nuts)</div>
-    <div class="task"><input type="checkbox"> Short movement break</div>
+    <div class="task"><input type="checkbox" id="t15"><label for="t15">Clean home/self (evening)</label></div>
+    <div class="task"><input type="checkbox" id="t16"><label for="t16">Evening snack (fruits, nuts)</label></div>
+    <div class="task"><input type="checkbox" id="t17"><label for="t17">Short movement break</label></div>
 
     <h2>🌙 Night Routine</h2>
-    <div class="task"><input type="checkbox"> Dinner (light, before 8:30)</div>
-    <div class="task"><input type="checkbox"> Skin care</div>
-    <div class="task"><input type="checkbox"> Next day plan</div>
-    <div class="task"><input type="checkbox"> Set clothes/books ready</div>
-    <div class="task"><input type="checkbox"> Gratitude/Prayer</div>
-    <div class="task"><input type="checkbox"> Sleep (7 hrs fixed)</div>
+    <div class="task"><input type="checkbox" id="t18"><label for="t18">Dinner (light, before 8:30)</label></div>
+    <div class="task"><input type="checkbox" id="t19"><label for="t19">Skin care</label></div>
+    <div class="task"><input type="checkbox" id="t20"><label for="t20">Next day plan</label></div>
+    <div class="task"><input type="checkbox" id="t21"><label for="t21">Set clothes/books ready</label></div>
+    <div class="task"><input type="checkbox" id="t22"><label for="t22">Gratitude/Prayer</label></div>
+    <div class="task"><input type="checkbox" id="t23"><label for="t23">Sleep (7 hrs fixed)</label></div>
 
     <h2>💎 Daily Rules</h2>
-    <div class="task"><input type="checkbox"> No sugar</div>
-    <div class="task"><input type="checkbox"> Drink 5 litres water</div>
-    <div class="task"><input type="checkbox"> No junk/oily foods</div>
-    <div class="task"><input type="checkbox"> Save minimum ₹10 daily</div>
-    <div class="task"><input type="checkbox"> Limit social media (max 30–45 mins)</div>
+    <div class="task"><input type="checkbox" id="t24"><label for="t24">No sugar</label></div>
+    <div class="task"><input type="checkbox" id="t25"><label for="t25">Drink 5 litres water</label></div>
+    <div class="task"><input type="checkbox" id="t26"><label for="t26">No junk/oily foods</label></div>
+    <div class="task"><input type="checkbox" id="t27"><label for="t27">Save minimum ₹10 daily</label></div>
+    <div class="task"><input type="checkbox" id="t28"><label for="t28">Limit social media (max 30–45 mins)</label></div>
 
-    <div class="score" id="score">📊 Discipline Score: 0%</div>
-  </div>
+    <div class="score-container">
+        <div class="score" id="score">📊 Discipline Score: 0%</div>
+        <button class="action-button" id="exportBtn">Finish Day & Export</button>
+        <button class="action-button" id="resetBtn">Reset for New Day</button>
+    </div>
 
-  <script>
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const scoreDisplay = document.getElementById('score');
+    <div id="export-area">
+        <div id="report-content">
+            <h3 id="report-title"></h3>
+            <h4 id="report-score"></h4>
+            <div id="export-output"></div>
+        </div>
+        <button class="action-button" id="downloadPdfBtn">⬇️ Download PDF</button>
+    </div>
+</div>
 
-    function updateScore() {
-      let checked = 0;
-      checkboxes.forEach(cb => {
-        if (cb.checked) checked++;
-      });
-      const total = checkboxes.length;
-      const percent = Math.round((checked / total) * 100);
-      scoreDisplay.textContent = `📊 Discipline Score: ${percent}%`;
-    }
+<script>
+    const { jsPDF } = window.jspdf;
 
-    checkboxes.forEach(cb => cb.addEventListener('change', updateScore));
-  </script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const scoreDisplay = document.getElementById('score');
+        const resetButton = document.getElementById('resetBtn');
+        const exportButton = document.getElementById('exportBtn');
+        const downloadPdfButton = document.getElementById('downloadPdfBtn');
+        const exportArea = document.getElementById('export-area');
+        const exportOutput = document.getElementById('export-output');
+        const reportTitle = document.getElementById('report-title');
+        const reportScore = document.getElementById('report-score');
+
+        const today = new Date();
+        const todayStringForFilename = today.toLocaleDateString('en-CA'); // YYYY-MM-DD
+        const storageKey = `checklistState_${today.toDateString()}`;
+
+        function updateScore() {
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
+            scoreDisplay.textContent = `📊 Discipline Score: ${percent}%`;
+            saveState();
+            return percent;
+        }
+
+        function saveState() {
+            const state = {};
+            checkboxes.forEach(cb => { state[cb.id] = cb.checked; });
+            localStorage.setItem(storageKey, JSON.stringify(state));
+        }
+
+        function loadState() {
+            const savedState = JSON.parse(localStorage.getItem(storageKey));
+            if (savedState) {
+                checkboxes.forEach(cb => {
+                    cb.checked = savedState[cb.id] || false;
+                });
+            }
+        }
+
+        function generateExportTable() {
+            let finalScore = updateScore();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            reportTitle.textContent = `Discipline Report for ${today.toLocaleDateString('en-US', options)}`;
+            reportScore.textContent = `Final Score: ${finalScore}%`;
+            let reportHtml = `<table class="report-table">`;
+            reportHtml += `<thead><tr><th>Task</th><th>Status</th></tr></thead><tbody>`;
+            checkboxes.forEach(cb => {
+                const taskLabel = document.querySelector(`label[for='${cb.id}']`).textContent;
+                const status = cb.checked ? 'Completed' : 'Missed';
+                reportHtml += `<tr><td>${taskLabel}</td><td>${status}</td></tr>`;
+            });
+            reportHtml += `</tbody></table>`;
+            exportOutput.innerHTML = reportHtml;
+            exportArea.style.display = 'block';
+        }
+
+        function downloadReportAsPDF() {
+            const pdf = new jsPDF();
+            const finalScore = updateScore();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const titleText = `Discipline Report for ${today.toLocaleDateString('en-US', options)}`;
+            const scoreText = `Final Score: ${finalScore}%`;
+
+            pdf.setFontSize(18);
+            pdf.text(titleText, 14, 22);
+            pdf.setFontSize(14);
+            pdf.text(scoreText, 14, 32);
+
+            const tableHead = [['Task', 'Status']];
+            const tableBody = [];
+            checkboxes.forEach(cb => {
+                const taskLabel = document.querySelector(`label[for='${cb.id}']`).textContent;
+                const status = cb.checked ? 'Yes' : 'No';
+                tableBody.push([taskLabel, status]);
+            });
+
+            pdf.autoTable({
+                head: tableHead,
+                body: tableBody,
+                startY: 40,
+                theme: 'striped',
+                headStyles: { fillColor: [74, 144, 226] }
+            });
+
+            pdf.save(`Discipline-Report-${todayStringForFilename}.pdf`);
+        }
+
+        exportButton.addEventListener('click', generateExportTable);
+        downloadPdfButton.addEventListener('click', downloadReportAsPDF);
+        resetButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all tasks for today?')) {
+                checkboxes.forEach(cb => { cb.checked = false; });
+                updateScore();
+                exportArea.style.display = 'none';
+            }
+        });
+        checkboxes.forEach(cb => cb.addEventListener('change', updateScore));
+
+        loadState();
+        updateScore();
+    });
+</script>
+
 </body>
 </html>
